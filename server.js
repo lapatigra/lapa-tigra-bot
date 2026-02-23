@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
-const OWNER_CHAT_ID = process.env.954676667; // твой Telegram ID: 954676667
+const OWNER_CHAT_ID = process.env.OWNER_CHAT_ID; //твой Telegram ID: 954676667
 
 // Отправить сообщение тебе в Telegram
 async function sendTelegramMessage(text) {
