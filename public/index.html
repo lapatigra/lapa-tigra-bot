@@ -675,7 +675,12 @@
 
         document.getElementById('successScreen').classList.add('active');
         setTimeout(() => {
-            window.location.href = 'https://tips.yandex.ru/guest/payment/8888490?amount=1000';
+            if (tg) {
+        tg.openLink('https://tips.yandex.ru/guest/payment/8888490?amount=1000');
+        } else {
+        window.location.href = 'https://tips.yandex.ru/guest/payment/8888490?amount=1000';
+            }
+        ;
         }, 2000);
     };
 
