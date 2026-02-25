@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#080808">
     <title>Репертуар LAPA TIGRA</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -190,7 +190,7 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideDown {
-            from { transform: translateY(-50px); opacity: 0; }
+            from { transform: translateY(-30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
@@ -210,35 +210,36 @@
         .modal-content, .greeting-content {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2d1810 100%);
             margin: 2% auto;
-            padding: 25px;
+            padding: 20px;
             border: 3px solid #ff5722;
             border-radius: 20px;
-            width: 90%;
+            width: 92%;
             max-width: 430px;
-            max-height: 85vh;
+            max-height: 95vh;
             overflow-y: auto;
             position: relative;
             animation: slideDown 0.3s;
             box-shadow: 0 0 50px rgba(255,87,34,0.5);
+            display: flex;
+            flex-direction: column;
         }
-
-        .greeting-content { margin: 5% auto; max-height: none; overflow-y: visible; }
 
         .close {
             color: #ff5722;
             position: absolute;
-            right: 20px; top: 15px;
-            font-size: 35px;
+            right: 15px; top: 10px;
+            font-size: 30px;
             font-weight: bold;
             cursor: pointer;
+            z-index: 10;
         }
 
-        .search-box { margin: 20px 0; }
+        .search-box { margin: 15px 0; }
 
         .search-box input {
             width: 100%;
             padding: 12px 20px;
-            font-size: 14px;
+            font-size: 16px; /* Предотвращает зум на iOS */
             border: 2px solid #ff5722;
             border-radius: 30px;
             background: rgba(0,0,0,0.6);
@@ -247,49 +248,32 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        .search-box input::placeholder { color: rgba(255,255,255,0.5); }
-
         .song-item {
             padding: 10px 16px;
             margin: 5px 0;
             background: rgba(0,0,0,0.4);
             border-radius: 12px;
             cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
             font-size: 0.9em;
             color: #fff;
             border-left: 4px solid transparent;
             transition: all 0.3s;
         }
 
-        .song-item:hover, .song-item:active {
-            background: rgba(255,87,34,0.15);
-            border-left-color: #ff5722;
-        }
-
         .selected-song-display {
             background: rgba(255,87,34,0.2);
-            padding: 12px;
+            padding: 10px;
             border-radius: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             border-left: 4px solid #ff5722;
-            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            font-size: 0.9em;
-            color: #fff;
-        }
-
-        .greeting-content > p {
-            font-size: 0.9em;
-            color: #ff5722;
-            margin-bottom: 15px;
-            font-weight: 500;
+            font-size: 0.85em;
         }
 
         .greeting-textarea {
             width: 100%;
             padding: 12px;
-            font-size: 14px;
+            font-size: 16px; /* Важно для мобилок! */
             border: 2px solid #ff5722;
             border-radius: 15px;
             background: rgba(0,0,0,0.6);
@@ -297,72 +281,70 @@
             outline: none;
             margin-bottom: 10px;
             font-family: 'Montserrat', sans-serif;
-            min-height: 120px;
-            resize: vertical;
+            min-height: 80px;
+            max-height: 140px;
+            resize: none;
         }
 
-        .button-group { display: flex; gap: 15px; margin-top: 15px; }
+        .button-group { 
+            display: flex; 
+            gap: 12px; 
+            margin-top: 5px; 
+            padding-bottom: 5px;
+        }
 
         .btn-confirm, .btn-back {
             flex: 1;
-            padding: 12px;
+            padding: 14px;
             font-family: 'Montserrat', sans-serif;
             font-size: 13px;
             font-weight: 700;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .btn-confirm {
             background: linear-gradient(135deg, #ff5722 0%, #ff6f00 100%);
             color: white;
-            box-shadow: 0 6px 25px rgba(255,87,34,0.5);
+            box-shadow: 0 4px 15px rgba(255,87,34,0.4);
         }
 
         .btn-back {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
             color: white;
-            border: 2px solid #ff5722;
+            border: 2px solid rgba(255,87,34,0.5);
         }
 
         /* ЭКРАН ОПЛАТЫ */
         .payment-content {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2d1810 100%);
-            margin: 15% auto;
-            padding: 50px 30px;
+            margin: 10% auto;
+            padding: 40px 25px;
             border: 3px solid #ff5722;
             border-radius: 20px;
             width: 90%;
             max-width: 430px;
             text-align: center;
             animation: slideDown 0.3s;
-            box-shadow: 0 0 60px rgba(255,87,34,0.6);
         }
 
         .payment-amount {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 5.5em;
+            font-size: 4.5em;
             font-weight: 900;
             color: #ff5722;
-            text-shadow: 0 0 30px rgba(255,87,34,0.8);
-            line-height: 1;
+            text-shadow: 0 0 25px rgba(255,87,34,0.6);
         }
 
         .payment-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1em;
-            font-weight: 600;
+            font-size: 0.9em;
             color: rgba(255,255,255,0.7);
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin: 10px 0 35px;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
         }
 
-        /* Блок с именем пользователя */
         .user-badge {
             display: flex;
             align-items: center;
@@ -371,73 +353,46 @@
             border: 1px solid rgba(255,87,34,0.3);
             border-radius: 50px;
             padding: 8px 16px;
-            margin-bottom: 20px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85em;
-            color: rgba(255,255,255,0.8);
+            margin: 0 auto 20px;
+            width: fit-content;
+            font-size: 0.8em;
         }
-
-        .user-badge i { color: #ff5722; }
 
         .btn-pay {
             width: 100%;
-            padding: 18px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 17px;
+            padding: 16px;
+            font-size: 16px;
             font-weight: 700;
-            border: none;
             border-radius: 50px;
-            cursor: pointer;
             background: linear-gradient(135deg, #ff5722 0%, #ff6f00 100%);
             color: white;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 6px 30px rgba(255,87,34,0.6);
-            transition: all 0.3s;
-            margin-bottom: 12px;
+            border: none;
+            margin-bottom: 10px;
         }
-
-        .btn-pay:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .btn-pay-back {
             width: 100%;
-            padding: 12px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            border: 2px solid rgba(255,255,255,0.2);
-            border-radius: 50px;
-            cursor: pointer;
             background: transparent;
-            color: rgba(255,255,255,0.5);
-            transition: all 0.3s;
+            color: rgba(255,255,255,0.4);
+            border: none;
+            font-size: 0.9em;
         }
 
-        /* Экран успеха */
         .success-screen {
             display: none;
             position: fixed;
             z-index: 2000;
-            left: 0; top: 0;
-            width: 100%; height: 100%;
+            inset: 0;
             background: rgba(0,0,0,0.97);
             justify-content: center;
             align-items: center;
             flex-direction: column;
             text-align: center;
             padding: 30px;
-            animation: fadeIn 0.3s;
         }
 
         .success-screen.active { display: flex; }
-
-        .success-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-        }
-
-        .success-screen h2 { margin-bottom: 15px; font-size: 1.5em; }
-        .success-screen p { font-size: 1em; color: rgba(255,255,255,0.7); line-height: 1.7; }
     </style>
 </head>
 <body>
@@ -483,7 +438,6 @@
     <footer><p>© 2025 LAPA TIGRA</p></footer>
 </div>
 
-<!-- Список песен -->
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closeModal">&times;</span>
@@ -495,11 +449,10 @@
     </div>
 </div>
 
-<!-- Поздравление -->
 <div id="greetingModal" class="greeting-modal">
     <div class="greeting-content">
         <span class="close" id="closeGreeting">&times;</span>
-        <p>Стоимость поздравления 1000₽</p>
+        <p style="color: #ff5722; font-weight: 600; margin-bottom: 10px;">Стоимость поздравления 1000₽</p>
         <div class="selected-song-display" id="selectedSongDisplay"></div>
         <textarea class="greeting-textarea" id="greetingText" placeholder="Текст поздравления (имя, пожелания...)"></textarea>
         <div class="button-group">
@@ -509,7 +462,6 @@
     </div>
 </div>
 
-<!-- Экран оплаты -->
 <div id="paymentModal" class="payment-modal">
     <div class="payment-content">
         <div id="userBadge" class="user-badge" style="display:none">
@@ -523,15 +475,13 @@
     </div>
 </div>
 
-<!-- Экран успеха -->
 <div class="success-screen" id="successScreen">
-    <div class="success-icon">🎉</div>
+    <div class="success-icon" style="font-size: 60px;">🎉</div>
     <h2>Заказ отправлен!</h2>
     <p>Сейчас откроется страница оплаты.<br><br>После оплаты я получу уведомление и скоро исполню твою песню 🎸</p>
 </div>
 
 <script>
-    // Telegram Mini App init
     const tg = window.Telegram?.WebApp;
     if (tg) {
         tg.expand();
@@ -539,10 +489,8 @@
         tg.setBackgroundColor('#080808');
     }
 
-    // Получаем данные пользователя из Telegram
     const tgUser = tg?.initDataUnsafe?.user || null;
 
-    // Показываем badge с именем на экране оплаты
     if (tgUser) {
         const badge = document.getElementById('userBadge');
         const badgeText = document.getElementById('userBadgeText');
@@ -588,7 +536,6 @@
     document.getElementById('openModalBtn').onclick = () => {
         modal.style.display = 'block';
         renderSongs();
-        setTimeout(() => searchInput.focus(), 300);
     };
 
     document.getElementById('closeModal').onclick = () => modal.style.display = 'none';
@@ -621,6 +568,13 @@
 
     searchInput.addEventListener('input', e => renderSongs(e.target.value));
 
+    // АВТО-СКРОЛЛ ПРИ ФОКУСЕ
+    greetingText.addEventListener('focus', () => {
+        setTimeout(() => {
+            greetingText.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+    });
+
     document.getElementById('backBtn').onclick = () => {
         greetingModal.style.display = 'none';
         modal.style.display = 'block';
@@ -648,7 +602,6 @@
         btn.disabled = true;
         btn.textContent = '⏳ Отправка...';
 
-        // Отправляем данные на сервер (с данными пользователя из Telegram)
         try {
             await fetch('/api/notify', {
                 method: 'POST',
@@ -656,14 +609,11 @@
                 body: JSON.stringify({
                     song: selectedSong,
                     greeting: greeting,
-                    user: tgUser  // Данные из Telegram — автоматически!
+                    user: tgUser
                 })
             });
-        } catch(e) {
-            console.error('Notify error:', e);
-        }
+        } catch(e) { console.error('Notify error:', e); }
 
-        // Показываем экран успеха на секунду, потом на оплату
         document.getElementById('successScreen').classList.add('active');
         setTimeout(() => {
             window.location.href = 'https://tips.yandex.ru/guest/payment/8888490?amount=1000';
