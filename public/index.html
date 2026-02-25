@@ -17,7 +17,8 @@
             background: #080808; 
             height: 100%; 
             width: 100%;
-            overflow-x: hidden; /* Защита от горизонтального скролла */
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%; /* Запрещает авто-изменение размера текста на iOS */
         }
 
         body {
@@ -25,6 +26,7 @@
             color: #fff;
             display: flex;
             justify-content: center;
+            align-items: flex-start;
         }
 
         #app {
@@ -36,88 +38,117 @@
             z-index: 2;
         }
 
-        /* --- КОРРЕКЦИЯ МОДАЛОК --- */
+        /* HERO SECTION */
+        .hero { position: relative; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; }
+        .hero img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+            display: flex; align-items: flex-end; justify-content: center; padding-bottom: 40px;
+        }
+        .order-button-hero {
+            background: linear-gradient(135deg, #ff5722 0%, #ff6f00 100%);
+            border: none; padding: 18px 56px; border-radius: 50px;
+            color: white; font-weight: 800; font-size: 18px; text-transform: uppercase;
+        }
+
+        /* MODALS */
         .modal, .greeting-modal, .payment-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0; top: 0;
-            width: 100vw; 
-            height: 100vh;
-            background-color: rgba(0,0,0,0.95);
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+            width: 100%; height: 100%; background-color: rgba(0,0,0,0.92);
         }
 
         .modal-content, .greeting-content {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2d1810 100%);
-            margin: 10px auto; /* Минимальный отступ сверху */
+            margin: 0 auto; /* Приклеили кверху */
             padding: 20px;
             border: 2px solid #ff5722;
-            border-radius: 20px;
-            width: 94%; /* Чтобы не вылезало за края */
-            max-width: 400px;
-            max-height: 90vh;
-            overflow-y: auto;
+            border-top: none; /* Убираем верхнюю рамку, так как прижато к краю */
+            border-radius: 0 0 20px 20px;
+            width: 95%;
+            max-width: 430px;
             position: relative;
-            box-shadow: 0 0 30px rgba(255,87,34,0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
-        /* 2. ШРИФТ 16PX - ГЛАВНОЕ ПРОТИВ ЗУМА */
+        /* Специально для окна поздравления */
+        .greeting-content {
+            margin-top: 0; 
+            padding-top: 15px; /* Минимальный отступ сверху */
+        }
+
+        .close {
+            color: #ff5722; position: absolute; right: 15px; top: 10px;
+            font-size: 30px; font-weight: bold; cursor: pointer; z-index: 10;
+        }
+
+        .greeting-content > p {
+            font-size: 14px;
+            color: #ff5722;
+            margin: 0 0 10px 0; /* Сократили отступы заголовка */
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .selected-song-display {
+            background: rgba(255,87,34,0.15);
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ff5722;
+            font-size: 0.9em;
+        }
+
+        /* 16PX + Сброс стилей iOS для предотвращения зума */
         .greeting-textarea, .search-box input {
             width: 100%;
             padding: 12px;
             font-size: 16px !important; 
             border: 2px solid #ff5722;
-            border-radius: 12px;
+            border-radius: 15px;
             background: rgba(0,0,0,0.6);
             color: white;
             outline: none;
             font-family: 'Montserrat', sans-serif;
-            margin-bottom: 15px;
-            -webkit-appearance: none; /* Убирает стандартные стили iOS */
+            -webkit-appearance: none; 
+            appearance: none;
         }
 
         .greeting-textarea {
             min-height: 100px;
-            max-height: 150px;
+            max-height: 140px;
+            margin-bottom: 8px; /* Уменьшили расстояние до кнопок */
             resize: none;
         }
 
         .button-group {
             display: flex;
             gap: 10px;
-            margin-top: 5px;
+            margin-top: 5px; /* Минимальный отступ сверху группы кнопок */
         }
 
         .btn-confirm, .btn-back {
-            flex: 1;
-            padding: 15px;
-            font-size: 14px;
-            font-weight: 700;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
+            flex: 1; padding: 14px; border-radius: 50px; border: none;
+            font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px;
+            text-transform: uppercase; cursor: pointer;
         }
 
-        .btn-confirm { background: #ff5722; color: #white; }
-        .btn-back { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid #ff5722; }
+        .btn-confirm { background: #ff5722; color: white; }
+        .btn-back { background: rgba(255,255,255,0.05); color: white; border: 1px solid #ff5722; }
 
-        /* ОСТАЛЬНЫЕ СТИЛИ (ГЕРОЙ, КОНТАКТЫ) */
-        .hero { width: 100%; aspect-ratio: 1; overflow: hidden; position: relative; }
-        .hero img { width: 100%; height: 100%; object-fit: cover; }
-        .hero-overlay { position: absolute; bottom: 30px; width: 100%; display: flex; justify-content: center; }
-        .order-button-hero {
-            background: #ff5722; border: none; padding: 15px 40px; border-radius: 50px;
-            color: white; font-weight: 800; font-size: 18px; text-transform: uppercase;
-        }
-        main { padding: 20px; }
+        /* MAIN STYLES */
+        main { padding: 25px 20px; }
         .repertoire, .contacts {
-            background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px;
-            border: 1px solid rgba(255,87,34,0.2); margin-bottom: 20px; text-align: center;
+            background: rgba(0,0,0,0.5); padding: 25px; border-radius: 20px;
+            border: 1px solid rgba(255,87,34,0.2); margin-bottom: 25px; text-align: center;
         }
-        h2 { color: #ff5722; margin-bottom: 10px; font-size: 1.2em; }
-        .contact-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .contact-item { background: rgba(255,87,34,0.1); padding: 10px; border-radius: 10px; text-decoration: none; color: #fff; font-size: 0.8em; border: 1px solid #ff5722; }
+        h2 { color: #ff5722; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        .orange-text { color: #ff5722; font-weight: 700; }
+        .contact-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+        .contact-item {
+            background: rgba(255,87,34,0.1); padding: 12px; border-radius: 50px;
+            text-decoration: none; color: white; font-size: 0.8em; border: 1px solid rgba(255,87,34,0.3);
+        }
     </style>
 </head>
 <body>
@@ -133,17 +164,17 @@
     <main>
         <div class="repertoire">
             <h2>Заказ песни за 1000₽</h2>
-            <p style="font-size: 0.9em; margin-bottom: 10px;">Выбери песню и напиши поздравление!</p>
-            <p style="color: #ff5722; font-size: 0.8em;">ТОЛЬКО ПЕСНИ ИЗ РЕПЕРТУАРА</p>
+            <p>Выбери песню и напиши текст поздравления!</p>
+            <p class="orange-text" style="margin-top: 10px;">ТОЛЬКО ПЕСНИ ИЗ РЕПЕРТУАРА</p>
         </div>
 
         <div class="contacts">
             <h2>Контакты</h2>
             <div class="contact-links">
-                <a href="https://music.yandex.ru/artist/19420584" class="contact-item">Яндекс Музыка</a>
-                <a href="https://instagram.com/lapa_tigra_music" class="contact-item">Instagram</a>
-                <a href="https://vk.com/lapa.tigra" class="contact-item">ВКонтакте</a>
-                <a href="https://t.me/lapa_tigra_music" class="contact-item">Telegram</a>
+                <a href="https://music.yandex.ru/artist/19420584" target="_blank" class="contact-item">Music</a>
+                <a href="https://instagram.com/lapa_tigra_music" target="_blank" class="contact-item">Instagram</a>
+                <a href="https://vk.com/lapa.tigra" target="_blank" class="contact-item">VK</a>
+                <a href="https://t.me/lapa_tigra_music" target="_blank" class="contact-item">Telegram</a>
             </div>
         </div>
     </main>
@@ -151,19 +182,24 @@
 
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <h2>Выберите песню</h2>
-        <input type="text" id="searchInput" placeholder="Поиск...">
-        <div id="songList"></div>
+        <span class="close" id="closeModal">&times;</span>
+        <h2 style="font-size: 1.1em;">Выберите песню</h2>
+        <div style="margin: 15px 0;">
+            <input type="text" id="searchInput" placeholder="Поиск песни...">
+        </div>
+        <div id="songList" style="max-height: 60vh; overflow-y: auto;"></div>
     </div>
 </div>
 
 <div id="greetingModal" class="greeting-modal">
     <div class="greeting-content">
-        <h2 id="selectedSongDisplay" style="font-size: 1em;">Песня</h2>
-        <textarea class="greeting-textarea" id="greetingText" placeholder="Кому и что сказать?"></textarea>
+        <span class="close" id="closeGreeting">&times;</span>
+        <p>Стоимость поздравления 1000₽</p>
+        <div class="selected-song-display" id="selectedSongDisplay"></div>
+        <textarea class="greeting-textarea" id="greetingText" placeholder="Текст поздравления..."></textarea>
         <div class="button-group">
             <button class="btn-back" id="backBtn">Назад</button>
-            <button class="btn-confirm" id="confirmBtn">Далее</button>
+            <button class="btn-confirm" id="confirmBtn">Далее →</button>
         </div>
     </div>
 </div>
@@ -174,45 +210,51 @@
 
     const songs = [
         { category: 'А', items: ['Агутин - Половина сердца', 'Амега - Лететь']},
-        { category: 'Б', items: ['Баста - Сансара', 'Браво - Я то что надо']},
-        { category: 'З', items: ['Звери - Районы-кварталы', 'Звери - Все что касается']},
+        { category: 'Б', items: ['Баста - Сансара', 'Браво - Любите девушки']},
+        { category: 'З', items: ['Звери - Районы-кварталы', 'Звери - Танцуй']},
         { category: 'Р', items: ['Руки вверх - 18 мне уже', 'Руки вверх - Алешка']}
-        // ... (добавьте остальные песни здесь)
     ];
-
-    let selectedSong = "";
 
     const modal = document.getElementById('myModal');
     const greetingModal = document.getElementById('greetingModal');
     const songList = document.getElementById('songList');
     const searchInput = document.getElementById('searchInput');
+    const greetingText = document.getElementById('greetingText');
 
-    document.getElementById('openModalBtn').onclick = () => modal.style.display = 'block';
+    let selectedSong = null;
+
+    document.getElementById('openModalBtn').onclick = () => {
+        modal.style.display = 'block';
+        renderSongs();
+    };
 
     function renderSongs(filter = '') {
         songList.innerHTML = '';
         songs.forEach(cat => {
-            const filteredItems = cat.items.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
-            if (filteredItems.length > 0) {
-                filteredItems.forEach(song => {
-                    const d = document.createElement('div');
-                    d.style.padding = '12px';
-                    d.style.borderBottom = '1px solid #333';
-                    d.textContent = song;
-                    d.onclick = () => {
+            const items = cat.items.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
+            if (items.length > 0) {
+                items.forEach(song => {
+                    const div = document.createElement('div');
+                    div.style.padding = '12px';
+                    div.style.borderBottom = '1px solid #333';
+                    div.textContent = song;
+                    div.onclick = () => {
                         selectedSong = song;
-                        document.getElementById('selectedSongDisplay').textContent = "🎵 " + song;
+                        document.getElementById('selectedSongDisplay').textContent = '🎵 ' + song;
                         modal.style.display = 'none';
                         greetingModal.style.display = 'block';
                     };
-                    songList.appendChild(d);
+                    songList.appendChild(div);
                 });
             }
         });
     }
 
-    renderSongs();
     searchInput.oninput = (e) => renderSongs(e.target.value);
+
+    // Закрытие
+    document.getElementById('closeModal').onclick = () => modal.style.display = 'none';
+    document.getElementById('closeGreeting').onclick = () => greetingModal.style.display = 'none';
 
     document.getElementById('backBtn').onclick = () => {
         greetingModal.style.display = 'none';
@@ -220,16 +262,17 @@
     };
 
     document.getElementById('confirmBtn').onclick = () => {
-        const text = document.getElementById('greetingText').value;
-        if (!text) return alert("Введите текст");
+        if (!greetingText.value.trim()) return alert('Введите текст');
         window.location.href = 'https://tips.yandex.ru/guest/payment/8888490?amount=1000';
     };
 
-    // Закрытие при клике вне окна
-    window.onclick = (e) => {
-        if (e.target == modal) modal.style.display = 'none';
-        if (e.target == greetingModal) greetingModal.style.display = 'none';
-    };
+    // Авто-скролл для страховки
+    greetingText.addEventListener('focus', () => {
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+            document.body.scrollTop = 0;
+        }, 100);
+    });
 </script>
 
 </body>
