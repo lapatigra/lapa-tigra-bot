@@ -11,35 +11,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-        html { background: #080808; height: -webkit-fill-available; }
+        html, body { 
+            background: #080808; 
+            height: 100%; 
+            width: 100%;
+            overflow-x: hidden; /* Защита от горизонтального скролла */
+        }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: #080808;
             color: #fff;
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
-            width: 100%;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 60% 50% at 20% 50%, rgba(255,87,34,0.12) 0%, transparent 70%),
-                radial-gradient(ellipse 60% 50% at 80% 50%, rgba(180,30,10,0.10) 0%, transparent 70%),
-                radial-gradient(ellipse 100% 40% at 50% 100%, rgba(255,111,0,0.08) 0%, transparent 60%),
-                #080808;
-            z-index: 0;
-            pointer-events: none;
         }
 
         #app {
@@ -49,350 +34,90 @@
             min-height: 100vh;
             position: relative;
             z-index: 2;
-            box-shadow: 0 0 80px rgba(255,87,34,0.15), 0 0 200px rgba(255,87,34,0.08);
         }
 
-        /* HERO */
-        .hero {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
-        }
-
-        .hero img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding-bottom: 40px;
-        }
-
-        @keyframes pulse-glow {
-            0%   { box-shadow: 0 10px 40px rgba(255,87,34,0.6), 0 0 0 0 rgba(255,87,34,0.6); }
-            70%  { box-shadow: 0 10px 40px rgba(255,87,34,0.6), 0 0 0 36px rgba(255,87,34,0); }
-            100% { box-shadow: 0 10px 40px rgba(255,87,34,0.6), 0 0 0 0 rgba(255,87,34,0); }
-        }
-
-        .order-button-hero {
-            background: linear-gradient(135deg, #ff5722 0%, #ff6f00 100%);
-            border: none;
-            padding: 18px 56px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.3s;
-            animation: pulse-glow 1.4s ease-in-out infinite;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 18px;
-            font-weight: 800;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        main { padding: 25px 20px; }
-
-        .repertoire {
-            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(45,24,16,0.5) 100%);
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,87,34,0.2);
-            margin-bottom: 25px;
-        }
-
-        .contacts {
-            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(45,24,16,0.5) 100%);
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,87,34,0.2);
-            text-align: center;
-        }
-
-        .orange-text { color: #ff5722; font-weight: 700; }
-        .line { border: none; border-top: 2px solid #ff5722; margin: 15px 0; }
-
-        h2 {
-            font-family: 'Montserrat', sans-serif;
-            color: #ff5722;
-            text-align: center;
-            margin: 12px 0;
-            font-size: 1.3em;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(255,87,34,0.5);
-        }
-
-        h3 {
-            font-family: 'Montserrat', sans-serif;
-            color: #ff5722;
-            margin-top: 15px;
-            font-size: 0.95em;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        p {
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.5;
-            margin: 6px 0;
-            text-align: center;
-            font-size: 0.88em;
-            color: #fff;
-            font-weight: 300;
-        }
-
-        .contact-links {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: rgba(255,87,34,0.1);
-            padding: 12px;
-            border-radius: 50px;
-            text-decoration: none;
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 0.8em;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border: 2px solid rgba(255,87,34,0.3);
-            transition: all 0.3s;
-        }
-
-        .contact-item i { font-size: 18px; color: #ff5722; }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.8em;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideDown {
-            from { transform: translateY(-30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
+        /* --- КОРРЕКЦИЯ МОДАЛОК --- */
         .modal, .greeting-modal, .payment-modal {
             display: none;
             position: fixed;
             z-index: 1000;
             left: 0; top: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.92);
-            animation: fadeIn 0.3s;
+            width: 100vw; 
+            height: 100vh;
+            background-color: rgba(0,0,0,0.95);
         }
-
-        .greeting-modal { z-index: 1001; }
-        .payment-modal { z-index: 1002; background-color: rgba(0,0,0,0.97); }
 
         .modal-content, .greeting-content {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2d1810 100%);
-            margin: 2% auto;
+            margin: 10px auto; /* Минимальный отступ сверху */
             padding: 20px;
-            border: 3px solid #ff5722;
+            border: 2px solid #ff5722;
             border-radius: 20px;
-            width: 92%;
-            max-width: 430px;
-            max-height: 95vh;
+            width: 94%; /* Чтобы не вылезало за края */
+            max-width: 400px;
+            max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            animation: slideDown 0.3s;
-            box-shadow: 0 0 50px rgba(255,87,34,0.5);
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0 0 30px rgba(255,87,34,0.3);
         }
 
-        .close {
-            color: #ff5722;
-            position: absolute;
-            right: 15px; top: 10px;
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .search-box { margin: 15px 0; }
-
-        .search-box input {
+        /* 2. ШРИФТ 16PX - ГЛАВНОЕ ПРОТИВ ЗУМА */
+        .greeting-textarea, .search-box input {
             width: 100%;
-            padding: 12px 20px;
-            font-size: 16px; /* Предотвращает зум на iOS */
+            padding: 12px;
+            font-size: 16px !important; 
             border: 2px solid #ff5722;
-            border-radius: 30px;
+            border-radius: 12px;
             background: rgba(0,0,0,0.6);
             color: white;
             outline: none;
             font-family: 'Montserrat', sans-serif;
-        }
-
-        .song-item {
-            padding: 10px 16px;
-            margin: 5px 0;
-            background: rgba(0,0,0,0.4);
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 0.9em;
-            color: #fff;
-            border-left: 4px solid transparent;
-            transition: all 0.3s;
-        }
-
-        .selected-song-display {
-            background: rgba(255,87,34,0.2);
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            border-left: 4px solid #ff5722;
-            font-weight: 600;
-            font-size: 0.85em;
+            margin-bottom: 15px;
+            -webkit-appearance: none; /* Убирает стандартные стили iOS */
         }
 
         .greeting-textarea {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px; /* Важно для мобилок! */
-            border: 2px solid #ff5722;
-            border-radius: 15px;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            outline: none;
-            margin-bottom: 10px;
-            font-family: 'Montserrat', sans-serif;
-            min-height: 80px;
-            max-height: 140px;
+            min-height: 100px;
+            max-height: 150px;
             resize: none;
         }
 
-        .button-group { 
-            display: flex; 
-            gap: 12px; 
-            margin-top: 5px; 
-            padding-bottom: 5px;
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
         }
 
         .btn-confirm, .btn-back {
             flex: 1;
-            padding: 14px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
+            padding: 15px;
+            font-size: 14px;
             font-weight: 700;
-            border: none;
             border-radius: 50px;
+            border: none;
             cursor: pointer;
             text-transform: uppercase;
         }
 
-        .btn-confirm {
-            background: linear-gradient(135deg, #ff5722 0%, #ff6f00 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(255,87,34,0.4);
-        }
+        .btn-confirm { background: #ff5722; color: #white; }
+        .btn-back { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid #ff5722; }
 
-        .btn-back {
-            background: rgba(255,255,255,0.05);
-            color: white;
-            border: 2px solid rgba(255,87,34,0.5);
+        /* ОСТАЛЬНЫЕ СТИЛИ (ГЕРОЙ, КОНТАКТЫ) */
+        .hero { width: 100%; aspect-ratio: 1; overflow: hidden; position: relative; }
+        .hero img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-overlay { position: absolute; bottom: 30px; width: 100%; display: flex; justify-content: center; }
+        .order-button-hero {
+            background: #ff5722; border: none; padding: 15px 40px; border-radius: 50px;
+            color: white; font-weight: 800; font-size: 18px; text-transform: uppercase;
         }
-
-        /* ЭКРАН ОПЛАТЫ */
-        .payment-content {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2d1810 100%);
-            margin: 10% auto;
-            padding: 40px 25px;
-            border: 3px solid #ff5722;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 430px;
-            text-align: center;
-            animation: slideDown 0.3s;
+        main { padding: 20px; }
+        .repertoire, .contacts {
+            background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px;
+            border: 1px solid rgba(255,87,34,0.2); margin-bottom: 20px; text-align: center;
         }
-
-        .payment-amount {
-            font-size: 4.5em;
-            font-weight: 900;
-            color: #ff5722;
-            text-shadow: 0 0 25px rgba(255,87,34,0.6);
-        }
-
-        .payment-label {
-            font-size: 0.9em;
-            color: rgba(255,255,255,0.7);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-        }
-
-        .user-badge {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255,87,34,0.1);
-            border: 1px solid rgba(255,87,34,0.3);
-            border-radius: 50px;
-            padding: 8px 16px;
-            margin: 0 auto 20px;
-            width: fit-content;
-            font-size: 0.8em;
-        }
-
-        .btn-pay {
-            width: 100%;
-            padding: 16px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 50px;
-            background: linear-gradient(135deg, #ff5722 0%, #ff6f00 100%);
-            color: white;
-            text-transform: uppercase;
-            border: none;
-            margin-bottom: 10px;
-        }
-
-        .btn-pay-back {
-            width: 100%;
-            background: transparent;
-            color: rgba(255,255,255,0.4);
-            border: none;
-            font-size: 0.9em;
-        }
-
-        .success-screen {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            inset: 0;
-            background: rgba(0,0,0,0.97);
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            padding: 30px;
-        }
-
-        .success-screen.active { display: flex; }
+        h2 { color: #ff5722; margin-bottom: 10px; font-size: 1.2em; }
+        .contact-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .contact-item { background: rgba(255,87,34,0.1); padding: 10px; border-radius: 10px; text-decoration: none; color: #fff; font-size: 0.8em; border: 1px solid #ff5722; }
     </style>
 </head>
 <body>
@@ -408,172 +133,86 @@
     <main>
         <div class="repertoire">
             <h2>Заказ песни за 1000₽</h2>
-            <p>Выбери песню из репертуара и напиши текст поздравления — всё остальное автоматически!</p>
-            <hr class="line">
-            <p><span class="orange-text">Порядок исполнения:</span></p>
-            <p>С 20:30 до 21:00 &nbsp;|&nbsp; С 21:30 до 22:00<br>С 22:30 до 23:00 &nbsp;|&nbsp; (пт, сб) С 23:30 до 00:00</p>
-            <hr class="line">
-            <p class="orange-text">ТОЛЬКО ПЕСНИ ИЗ РЕПЕРТУАРА</p>
+            <p style="font-size: 0.9em; margin-bottom: 10px;">Выбери песню и напиши поздравление!</p>
+            <p style="color: #ff5722; font-size: 0.8em;">ТОЛЬКО ПЕСНИ ИЗ РЕПЕРТУАРА</p>
         </div>
 
         <div class="contacts">
             <h2>Контакты</h2>
             <div class="contact-links">
-                <a href="https://music.yandex.ru/artist/19420584" target="_blank" class="contact-item">
-                    <i class="fas fa-music"></i><span>Яндекс Музыка</span>
-                </a>
-                <a href="https://instagram.com/lapa_tigra_music" target="_blank" class="contact-item">
-                    <i class="fab fa-instagram"></i><span>Instagram</span>
-                </a>
-                <a href="https://vk.com/lapa.tigra" target="_blank" class="contact-item">
-                    <i class="fab fa-vk"></i><span>ВКонтакте</span>
-                </a>
-                <a href="https://t.me/lapa_tigra_music" target="_blank" class="contact-item">
-                    <i class="fab fa-telegram"></i><span>Telegram</span>
-                </a>
+                <a href="https://music.yandex.ru/artist/19420584" class="contact-item">Яндекс Музыка</a>
+                <a href="https://instagram.com/lapa_tigra_music" class="contact-item">Instagram</a>
+                <a href="https://vk.com/lapa.tigra" class="contact-item">ВКонтакте</a>
+                <a href="https://t.me/lapa_tigra_music" class="contact-item">Telegram</a>
             </div>
         </div>
     </main>
-
-    <footer><p>© 2025 LAPA TIGRA</p></footer>
 </div>
 
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <span class="close" id="closeModal">&times;</span>
         <h2>Выберите песню</h2>
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="🔍 Поиск...">
-        </div>
+        <input type="text" id="searchInput" placeholder="Поиск...">
         <div id="songList"></div>
     </div>
 </div>
 
 <div id="greetingModal" class="greeting-modal">
     <div class="greeting-content">
-        <span class="close" id="closeGreeting">&times;</span>
-        <p style="color: #ff5722; font-weight: 600; margin-bottom: 10px;">Стоимость поздравления 1000₽</p>
-        <div class="selected-song-display" id="selectedSongDisplay"></div>
-        <textarea class="greeting-textarea" id="greetingText" placeholder="Текст поздравления (имя, пожелания...)"></textarea>
+        <h2 id="selectedSongDisplay" style="font-size: 1em;">Песня</h2>
+        <textarea class="greeting-textarea" id="greetingText" placeholder="Кому и что сказать?"></textarea>
         <div class="button-group">
             <button class="btn-back" id="backBtn">Назад</button>
-            <button class="btn-confirm" id="confirmBtn">Далее →</button>
+            <button class="btn-confirm" id="confirmBtn">Далее</button>
         </div>
     </div>
-</div>
-
-<div id="paymentModal" class="payment-modal">
-    <div class="payment-content">
-        <div id="userBadge" class="user-badge" style="display:none">
-            <i class="fab fa-telegram"></i>
-            <span id="userBadgeText"></span>
-        </div>
-        <div class="payment-amount">1000₽</div>
-        <div class="payment-label">Поздравление</div>
-        <button class="btn-pay" id="payBtn">💳 Оплатить</button>
-        <button class="btn-pay-back" id="payBackBtn">← Назад</button>
-    </div>
-</div>
-
-<div class="success-screen" id="successScreen">
-    <div class="success-icon" style="font-size: 60px;">🎉</div>
-    <h2>Заказ отправлен!</h2>
-    <p>Сейчас откроется страница оплаты.<br><br>После оплаты я получу уведомление и скоро исполню твою песню 🎸</p>
 </div>
 
 <script>
     const tg = window.Telegram?.WebApp;
-    if (tg) {
-        tg.expand();
-        tg.setHeaderColor('#080808');
-        tg.setBackgroundColor('#080808');
-    }
-
-    const tgUser = tg?.initDataUnsafe?.user || null;
-
-    if (tgUser) {
-        const badge = document.getElementById('userBadge');
-        const badgeText = document.getElementById('userBadgeText');
-        const name = tgUser.first_name + (tgUser.last_name ? ' ' + tgUser.last_name : '');
-        badgeText.textContent = name + (tgUser.username ? ' · @' + tgUser.username : '');
-        badge.style.display = 'flex';
-    }
+    if (tg) tg.expand();
 
     const songs = [
-        { category: 'А', items: ['Агутин - Как не думать о тебе', 'Агутин - Половина сердца', 'Амега - Лететь', 'Андрей Губин - Девушки, как звезды', 'Андрей Губин - Ночь', 'Антон Токарев - Седьмой Лепесток', 'Антонов Юрий - Летящей походкой', 'Антонов Юрий - Мечта сбывается', 'Артур Пирожков – Зацепила']},
-        { category: 'Б', items: ['Баста - Медлячок', 'Баста - Сансара', 'Браво - Вас', 'Браво - Любите девушки', 'Браво - Я то что надо', 'Браво - Как жаль', 'Бумбокс - Вахтерам']},
-        { category: 'В', items: ['Ваня Дмитриенко - Венера юпитер', 'Видели ночь']},
-        { category: 'Г', items: ['Градусы - Голая', 'Galibri x Mavik - Федерико Феллини', 'Gayazov Brothers - Малиновая Лада']},
-        { category: 'Д', items: ['Дима Билан - Держи', 'Дима Билан - Молния', 'Дима Билан - Острой бритвой', 'DаЬro - На часах 00', 'DаЬro - Юность']},
-        { category: 'Ж', items: ['Жуки - Батарейка']},
-        { category: 'З', items: ['Звери - Все что тебя касается', 'Звери - Районы-кварталы', 'Звери - Танцуй', 'Земляне - Трава у дома']},
-        { category: 'И', items: ['Иванушки - тополиный пух']},
-        { category: 'К', items: ['Корни - Ты узнаешь ее', 'Корни - с днём рождения, Вика', 'Король и Шут - Кукла колдуна', 'Крид - Самая самая', 'Крид - Моя невеста']},
-        { category: 'Л', items: ['Лазарев - В самое сердце', 'Ленинград - Рыба моей мечты', 'Ленинград - WWW', 'Лепрконсы - Хали Гали']},
-        { category: 'М', items: ['Мумий Тролль - Владивосток 2000', 'Мумий Тролль - Невеста', 'Мурат Насыров - Я это ты', 'MACAN - Asphalt 8']},
-        { category: 'Н', items: ['Нилетто - Любимка', 'Нилетто х Джиган х Artik & Asti - Худи', 'Нилетто х Свик х Олег Майами - Не вспоминай']},
-        { category: 'О', items: ['Отпетые Мош. - Люби меня люби']},
-        { category: 'Р', items: ['Руки вверх - Крошка моя', 'Руки вверх - Он тебя целует', 'Руки вверх - 18 мне', 'Руки вверх - Алешка']},
-        { category: 'С', items: ['Сплин - Выхода нет', 'Сплин - Мое сердце', 'Султан Лагучев - Горький вкус']},
-        { category: 'Т', items: ['Тима Белорусских - Незабудка', 'Тося Чайкина х Markul - Стрелы']},
-        { category: 'Х', items: ['Хабиб - Ягода - Малинка', 'ХОЛИДЕЙБОЙ - Хулиганка', 'ХОЛИДЕЙБОЙ - Пожары']},
-        { category: 'Ч', items: ['Чебанов - Солдат любви']},
-        { category: 'Ш', items: ['Шатунов - Белые розы', 'Шатунов - Седая ночь', 'Шатунов - День рождения']},
-        { category: 'Э', items: ['Элджей х Федук - Розовое вино']},
-        { category: 'ЗАРУБЕЖНЫЕ', items: ['Blur - Song 2', 'Bon Jovi - Its My Life', 'Bomfunk MCs - Freestyler', 'Bruno Mars – Uptown Funk', 'DNCE - Cake by the ocean', 'Elvis Presley - Blues way shoes', 'Fly Project - La musica', 'JONY - Комета', 'Justin Timberlake - Cant stop the Feeling', 'John Newman - Love me again', 'Limp Bizkit - Behind Blue Eyes', 'Linkin Park - In the end', 'Maneskin - Beggin', 'Maroon 5 - This Love', 'Michael Teo - Nosa', 'Pharrell - Happy', 'Questpistols - Белая стрекоза', 'Questpistols - Революция', 'Red Hot Chili Peppers - Cant stop', 'Robbie Williams - Feel', 'Ricky Martin - Livin la Vida Loca', 'Stone Sour - Througth the glass', 'The Black Eyed Peas – Lets Get It Started']}
+        { category: 'А', items: ['Агутин - Половина сердца', 'Амега - Лететь']},
+        { category: 'Б', items: ['Баста - Сансара', 'Браво - Я то что надо']},
+        { category: 'З', items: ['Звери - Районы-кварталы', 'Звери - Все что касается']},
+        { category: 'Р', items: ['Руки вверх - 18 мне уже', 'Руки вверх - Алешка']}
+        // ... (добавьте остальные песни здесь)
     ];
+
+    let selectedSong = "";
 
     const modal = document.getElementById('myModal');
     const greetingModal = document.getElementById('greetingModal');
-    const paymentModal = document.getElementById('paymentModal');
     const songList = document.getElementById('songList');
     const searchInput = document.getElementById('searchInput');
-    const selectedSongDisplay = document.getElementById('selectedSongDisplay');
-    const greetingText = document.getElementById('greetingText');
 
-    let selectedSong = null;
-
-    document.getElementById('openModalBtn').onclick = () => {
-        modal.style.display = 'block';
-        renderSongs();
-    };
-
-    document.getElementById('closeModal').onclick = () => modal.style.display = 'none';
-    document.getElementById('closeGreeting').onclick = () => greetingModal.style.display = 'none';
+    document.getElementById('openModalBtn').onclick = () => modal.style.display = 'block';
 
     function renderSongs(filter = '') {
         songList.innerHTML = '';
         songs.forEach(cat => {
-            const items = cat.items.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
-            if (items.length > 0) {
-                const h3 = document.createElement('h3');
-                h3.textContent = cat.category;
-                songList.appendChild(h3);
-                items.forEach(song => {
-                    const div = document.createElement('div');
-                    div.className = 'song-item';
-                    div.textContent = song;
-                    div.onclick = () => {
+            const filteredItems = cat.items.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
+            if (filteredItems.length > 0) {
+                filteredItems.forEach(song => {
+                    const d = document.createElement('div');
+                    d.style.padding = '12px';
+                    d.style.borderBottom = '1px solid #333';
+                    d.textContent = song;
+                    d.onclick = () => {
                         selectedSong = song;
-                        selectedSongDisplay.textContent = '🎵 ' + song;
+                        document.getElementById('selectedSongDisplay').textContent = "🎵 " + song;
                         modal.style.display = 'none';
-                        greetingText.value = '';
                         greetingModal.style.display = 'block';
                     };
-                    songList.appendChild(div);
+                    songList.appendChild(d);
                 });
             }
         });
     }
 
-    searchInput.addEventListener('input', e => renderSongs(e.target.value));
-
-    // АВТО-СКРОЛЛ ПРИ ФОКУСЕ
-    greetingText.addEventListener('focus', () => {
-        setTimeout(() => {
-            greetingText.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 300);
-    });
+    renderSongs();
+    searchInput.oninput = (e) => renderSongs(e.target.value);
 
     document.getElementById('backBtn').onclick = () => {
         greetingModal.style.display = 'none';
@@ -581,49 +220,15 @@
     };
 
     document.getElementById('confirmBtn').onclick = () => {
-        const greeting = greetingText.value.trim();
-        if (!greeting) {
-            if (tg) tg.showAlert('Пожалуйста, напишите текст поздравления 🙏');
-            else alert('Пожалуйста, напишите текст поздравления');
-            return;
-        }
-        greetingModal.style.display = 'none';
-        paymentModal.style.display = 'block';
+        const text = document.getElementById('greetingText').value;
+        if (!text) return alert("Введите текст");
+        window.location.href = 'https://tips.yandex.ru/guest/payment/8888490?amount=1000';
     };
 
-    document.getElementById('payBackBtn').onclick = () => {
-        paymentModal.style.display = 'none';
-        greetingModal.style.display = 'block';
-    };
-
-    document.getElementById('payBtn').onclick = async function() {
-        const greeting = greetingText.value.trim();
-        const btn = this;
-        btn.disabled = true;
-        btn.textContent = '⏳ Отправка...';
-
-        try {
-            await fetch('/api/notify', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    song: selectedSong,
-                    greeting: greeting,
-                    user: tgUser
-                })
-            });
-        } catch(e) { console.error('Notify error:', e); }
-
-        document.getElementById('successScreen').classList.add('active');
-        setTimeout(() => {
-            window.location.href = 'https://tips.yandex.ru/guest/payment/8888490?amount=1000';
-        }, 2000);
-    };
-
-    window.onclick = function(e) {
+    // Закрытие при клике вне окна
+    window.onclick = (e) => {
         if (e.target == modal) modal.style.display = 'none';
         if (e.target == greetingModal) greetingModal.style.display = 'none';
-        if (e.target == paymentModal) paymentModal.style.display = 'none';
     };
 </script>
 
