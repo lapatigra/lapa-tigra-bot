@@ -545,6 +545,12 @@
 </div>
 
 <script>
+    // Автоперезагрузка для Яндекс Типс
+    if (window.location.href.includes('reload=1')) {
+        const newUrl = window.location.href.replace('reload=1', 'reload=2');
+        window.location.replace(newUrl);
+    }
+
     const tg = window.Telegram?.WebApp;
     if (tg) {
         tg.expand();
@@ -675,11 +681,13 @@
 
         document.getElementById('successScreen').classList.add('active');
         setTimeout(() => {
-            if (tg) {
-        tg.openLink('https://tips.yandex.ru/guest/payment/8888490?amount=1000');
+            const payUrl = 'https://tips.yandex.ru/guest/payment/8888490?amount=1000&reload=1';
+        if (tg) {
+            tg.openLink(payUrl);
         } else {
-        window.location.href = 'https://tips.yandex.ru/guest/payment/8888490?amount=1000';
-            }
+            window.location.href = payUrl;
+        }
+
         ;
         }, 2000);
     };
