@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
     if (userId) message += `🆔 ID: ${userId}\n`;
     message += `\n🎶 Песня: ${song}\n`;
     message += `\n💬 Поздравление:\n${greeting}\n`;
-    message += `\n💳 Сумма: 1000₽`;
+    message += `\n💳 К оплате: 1000₽ через Яндекс Чаевые — заказ оформлен, проверьте, пришла ли оплата`;
 
     const data = JSON.stringify({
         chat_id: OWNER_CHAT_ID,
